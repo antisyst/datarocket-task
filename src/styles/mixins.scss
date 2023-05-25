@@ -1,0 +1,46 @@
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flexBetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@mixin inputNb ($bg-url) {
+    width: 100%;
+    font-size: 2.4rem;
+    font-weight: 700;
+    background-image: $bg-url;
+    background-repeat: no-repeat;
+    background-size: initial;
+    background-position: 5% center;
+    color: $neutral-clr-one;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    &:focus, &:hover{
+        outline: 2px solid $primary-clr;
+    }
+
+    &::placeholder{
+        color: $neutral-clr-three;
+    }
+}
+
+@mixin selectTip {
+    display: block;
+    padding: 10px 25px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}

@@ -1,0 +1,399 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+// Import SCSS
+@import "./styles/variables.scss";
+@import "./styles/mixins";
+// End Import SCSS
+
+
+
+
+// Reset css
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+input{
+	/* Firefox */
+	-moz-appearance: textfield;
+ 
+	/* Chrome */
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin:0;
+	}
+ 
+	/* Opéra*/
+	&::-o-inner-spin-button {
+		-o-appearance: none;
+		margin: 0; 
+	}
+}
+// End Reset css
+
+
+
+
+// General style
+:root{
+    font-size: 10px;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    background-color: $neutral-clr-four;
+    // @include flexCenter;
+    // flex-direction: column;
+}
+
+p{
+    font-family: $primary-font
+}
+
+h2{
+    font-family: $primary-font;
+    color: $neutral-clr-six
+}
+
+label{
+    font-family: $primary-font;
+    font-size: 1.8rem;
+    color: $neutral-clr-two;
+}
+
+input{
+    font-family: $primary-font;
+    background-color: $neutral-clr-five;
+    text-align: right;
+    border: none;
+}
+// End General style
+
+
+
+
+// Header
+header{
+    height: 20vh;
+    @include flexCenter;
+}
+// End Header
+
+
+
+
+// Main 
+
+// Container
+.container{
+    width: 100vw;
+    max-width: 1000px;
+    background-color: $neutral-clr-six;
+    border-radius: 25px 25px 0 0;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+// End Container
+
+
+
+// General Input Container
+.general-input-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px
+}
+// End General Input Container
+
+
+// Bill container
+.bill-container{
+    input{
+        @include inputNb(url('../public/icon-dollar.svg'));
+    }
+}
+// End Bill container
+
+// Select Tip Container
+.select-tip{
+
+}
+
+.tip-input{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: 
+    "five ten"
+    "fifteen twenty-five"
+    "fifty custom"
+    ;
+    column-gap: 15px;
+    row-gap: 15px;
+    margin-top: 15px;
+
+    input[type="radio"]{
+        display: none;
+
+        &:checked + label{
+            background-color: $primary-clr;
+            color: $neutral-clr-one;
+        }
+    }
+
+    input[type="radio"] + label{
+        @include selectTip;
+        background-color: $neutral-clr-one;
+        color: $neutral-clr-five;
+
+        &:hover{
+            background-color: $primary-clr;
+            color: $neutral-clr-one;
+        }
+    }
+
+
+    input[type="tel"]{
+        display: none;
+        width: 150px;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: $neutral-clr-one;
+        padding: 9px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.2s ease;
+
+        &:focus{
+            outline: 2px solid $primary-clr;
+        }
+    }
+
+    input[type="tel"] + label{
+        @include selectTip;
+        background-color: $neutral-clr-five;
+        color: $neutral-clr-two;
+
+        &:hover{
+            outline: 3px solid $primary-clr;
+            color: $primary-clr;
+        }
+    }
+
+
+}
+
+#five{
+    grid-area: five;
+}
+
+#ten{
+    grid-area: ten;
+}
+
+#fifteen{
+    grid-area: fifteen;
+}
+
+#twenty-five{
+    grid-area: twenty-five;
+}
+
+#fifty{
+    grid-area: fifty;
+}
+
+#custon{
+    grid-area: custom;
+}
+// End Select Tip Container
+
+// People Container
+.people-container{
+    input{
+        @include inputNb(url("../public/icon-person.svg"));
+        position: relative;
+    }
+
+    .nb-people-error{
+        @include flexBetween;
+    }
+
+    input.error{
+        outline: 2px solid red;
+    }
+
+    .input-error{
+        color: red;
+        font-size: 1rem;
+        display: inline-block;
+    }
+}
+// End People Container
+
+// Recap Container
+.recap-container{
+    width: 100%;
+    background-color: $neutral-clr-one;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+
+    p{
+        font-size: 1.4rem;
+        color: $neutral-clr-three;
+    }
+
+    .recap-top{
+        @include flexBetween;
+    }
+
+    .recap-bottom{
+        @include flexBetween;
+    }
+
+    .tip-amount, .total-amount{
+        p{
+            color: $primary-clr;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+    }
+
+    .btn-reset-form{        
+        button[type="reset"]{
+            width: 100%;
+            cursor: pointer;
+            background-color: $primary-clr;
+            color: $neutral-clr-one;
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: $primary-font;
+            text-transform: uppercase;
+            border-radius: 5px;
+            padding: 10px 0;
+            border: none;
+            transition: 0.2s ease;
+    
+            &:hover{
+                background-color: $neutral-clr-four;
+            }
+        }
+    }
+
+    .btn-reset-form.empty{        
+        button[type="reset"]{
+            background-color: $neutral-clr-seven;
+        }
+    }
+}
+
+// End Recap Container
+
+
+// End Main
+
+
+
+// Laptop screen 1440px
+@media screen and (min-width: 1440px) {
+    // General style
+    body{
+        @include flexCenter;
+        flex-direction: column;
+        row-gap: 40px;
+    }
+    // End General style
+
+
+
+    // Container
+    .container{
+        height: 500px;
+        border-radius: 25px;
+        flex-direction: row;
+        column-gap: 40px;
+    }
+    // End Container
+
+
+    // General Input Container
+    .general-input-container{
+        flex-basis: 50%;
+        justify-content: center;
+    }
+    // General Input Container
+
+
+
+    // Tip Input
+    .tip-input{
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-areas: 
+        "five ten fifteen"
+        "twenty-five fifty custom"
+        ;
+
+        input[type="tel"]{
+            width: 141px;
+        }
+    }
+
+    // Tip Input
+
+
+
+    // People Container
+    .people-container{
+        .input-error{
+            font-size: 1.8rem;
+        }
+    }
+    // End People Container
+
+
+
+
+
+    // Recap Container
+    .recap-container{
+        flex-basis: 50%;
+        padding: 70px 40px 40px 40px;
+
+        .tip-amount, .total-amount{
+            p{
+                font-size: 4.3rem;
+            }
+        }
+
+        .btn-reset-form{
+            margin-top: auto;
+        }
+    }
+
+
+
+
+
+}
